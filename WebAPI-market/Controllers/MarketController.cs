@@ -18,26 +18,26 @@ namespace WebAPI_market.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Market>> GetMarkets()
+        public async Task<IEnumerable<Market>> GetMarketsAsync()
         {
             return await _marketRepository.Get();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Market>> GetMarkets(int id)
+        public async Task<ActionResult<Market>> GetMarketsAsync(int id)
         {
             return await _marketRepository.Get(id);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Market>> PostMarket([FromBody] Market market)
+        public async Task<ActionResult<Market>> PostMarketAsync([FromBody] Market market)
         {
             var newMarket = await _marketRepository.Create(market);
             return CreatedAtAction(nameof(GetMarkets), new { id = newMarket.Id}, newMarket);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> DeleteAsync(int id)
         {
             var marketToDelete = await _marketRepository.Get(id);
             if (marketToDelete == null)
@@ -49,7 +49,7 @@ namespace WebAPI_market.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> PutMarkets(int id, [FromBody] Market market)
+        public async Task<ActionResult> PutMarketsAsync(int id, [FromBody] Market market)
         {
             if(id != market.Id)
                 return BadRequest();

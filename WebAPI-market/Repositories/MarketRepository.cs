@@ -13,7 +13,7 @@ namespace WebAPI_market.Repositories
         {
             _context = context;
         }
-        public async Task<Market> Create(Market market)
+        public async Task<Market> CreateAsync(Market market)
         {
             _context.Markets.Add(market);
             await _context.SaveChangesAsync();
@@ -21,24 +21,24 @@ namespace WebAPI_market.Repositories
             return market;
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var marketToDelete = await _context.Markets.FindAsync(id);
             _context.Markets.Remove(marketToDelete);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Market>> Get()
+        public async Task<IEnumerable<Market>> GetAsync()
         {
            return await _context.Markets.ToListAsync();
         }
 
-        public async Task<Market> Get(int id)
+        public async Task<Market> GetAsync(int id)
         {
            return await _context.Markets.FindAsync(id);
         }
 
-        public async Task Update(Market market)
+        public async Task UpdateAsync(Market market)
         {
             _context.Entry(market).State = EntityState.Modified;
             await _context.SaveChangesAsync();
